@@ -30,13 +30,14 @@ const Quote = () => {
             {quote ? (
                 <div>
                     <p className="quote-content">"{quote.content}"</p>
-                    <span style={{ fontWeight: 'bold' }} className="quote-author">{quote.author}</span>
+                    <span style={{ fontWeight: 'bold', display: 'flex', gap:'4rem' }} className="quote-author">{quote.author}
                     <img 
                         onClick={quoteFinder} 
                         src={RefreshIcon} 
                         alt="Refresh quote" 
                         style={{ cursor: "pointer" }}
                     />
+                    </span>
                 </div>
             ) : (
                 <p>Quote loading ...</p>
