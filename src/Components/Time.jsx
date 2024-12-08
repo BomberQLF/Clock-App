@@ -49,11 +49,11 @@ const Time = ({ setBackgroundClass }) => {
     <div>
       {time ? (
         <>
-          <h1>Heure locale : {formattedTime}</h1>
-          <p>Vous êtes à : {location?.city}, {location?.country_name}</p>
+          <h1>Time loading : {formattedTime}</h1>
+          <p>You are at : {location?.city}, {location?.country_name}</p>
         </>
       ) : (
-        <p>Chargement de l'heure...</p>
+        <p>Time loading...</p>
       )}
     </div>
   );
