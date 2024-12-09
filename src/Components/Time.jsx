@@ -4,6 +4,7 @@ import Moon from "../assets/desktop/icon-moon.svg";
 
 const Time = ({ setBackgroundClass }) => {
   const [time, setTime] = useState(null);
+  const [timezone, setTimezone] = useState(null);
   const [location, setLocation] = useState(null);
 
   useEffect(() => {
@@ -31,42 +32,58 @@ const Time = ({ setBackgroundClass }) => {
         }
         const timeData = await timeResponse.json();
         setTime(timeData.datetime);
+        setTimezone(timeData.abbreviation);
 
         // Étape 3 : Définir le fond en fonction de l'heure locale
         const hour = new Date(timeData.datetime).getHours();
         if (hour >= 6 && hour < 18) {
-          setBackgroundClass("daytime"); // Classe pour le jour
+          setBackgroundClass("daytime");
         } else {
-          setBackgroundClass("nighttime"); // Classe pour la nuit
+          setBackgroundClass("nighttime");
         }
       } catch (error) {
         console.error("Erreur lors de la récupération des données :", error);
       }
     };
 
-    fetchUserTime(); // Appel de la fonction asynchrone
+    fetchUserTime();
   }, [setBackgroundClass]);
 
   const formattedTime = time
     ? new Date(time).toLocaleTimeString("fr-FR", {
         hour: "2-digit", // Afficher l'heure en format 2 chiffres
         minute: "2-digit", // Afficher les minutes en format 2 chiffres
-        second: undefined, // Ne pas afficher les secondes
+        second: undefined,
       })
     : null;
 
   // Extraire l'heure en nombre
   const hour = time ? new Date(time).getHours() : null;
 
-  console.log(hour > 12);
-
   return (
-    <div>
+    <div className="quote-time-container">
       {time ? (
         <>
-          <h1>{formattedTime}</h1>
-          <p>
-            You are at : {location?.city}, {location?.country_name}
+          {hour >= 6 && hour < 18 ? (
+            <p
+              className="hello"
+              style={{ textTransform: "uppercase", letterSpacing: "4px" }}
+            >
+              <img src={Sun} alt="" /> Good Morning, it's currently
+            </p>
+          ) : (
+            <p
+              className="hello"
+              style={{ textTransform: "uppercase", letterSpacing: "4px" }}
+            >
+              <img src={Moon} alt="" /> Good evening, it's currently
+            </p>
+          )}
+          <h1 style={{ fontSize: "10rem", textTransform: "uppercase" }}>
+            {formattedTime} {timezone && <span style={{ fontSize: '3rem', fontWeight: '200' }}>{timezone}</span>}{" "}
+          </h1>
+          <p style={{ fontSize: "1.3rem", textTransform: "uppercase" }}>
+            In {location?.city}, {location?.country_name}
           </p>
         </>
       ) : (

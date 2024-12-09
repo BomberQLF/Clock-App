@@ -1,27 +1,46 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Signika:wght@300..700&display=swap");
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: "Inter", sans-serif;
 }
 
 .App {
   height: 100vh;
   background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
   color: white;
   transition: background 1s ease-in-out;
 }
 
 body {
-    background-color: grey;
-    color: white;
-    height: 100vh;
+  background-color: grey;
+  color: white;
+  height: 100vh;
+  overflow: hidden;
 }
+
 .App.daytime {
-  background-image: url('./assets/desktop/bg-image-daytime.jpg');
+  background-image: url("./assets/desktop/bg-image-daytime.jpg");
 }
 
 .App.nighttime {
-  background-image: url('./assets/desktop/bg-image-nighttime.jpg');
+  background-image: url("./assets/desktop/bg-image-nighttime.jpg");
+}
+
+.hello {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.quote-time-container {
+  position: absolute;
+  bottom: 0;
+  padding: 4rem;
 }
