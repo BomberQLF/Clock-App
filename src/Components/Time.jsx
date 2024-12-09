@@ -7,6 +7,11 @@ const Time = ({ setBackgroundClass }) => {
   const [time, setTime] = useState(null);
   const [timezone, setTimezone] = useState(null);
   const [location, setLocation] = useState(null);
+  const [detailsVisible, setDetailsVisible] = useState(false);
+
+  const handleToggleDetails = (isVisible) => {
+    setDetailsVisible(isVisible);
+  };
 
   useEffect(() => {
     const fetchUserTime = async () => {
@@ -62,22 +67,16 @@ const Time = ({ setBackgroundClass }) => {
   const hour = time ? new Date(time).getHours() : null;
 
   return (
-    <div className="quote-time-wrapper">
+    <div className={`quote-time-wrapper ${detailsVisible ? 'details-visible' : ''}`}>
       <div className="quote-time-container">
         {time ? (
           <>
             {hour >= 6 && hour < 18 ? (
-              <p
-                className="hello"
-                style={{ textTransform: "uppercase", letterSpacing: "4px" }}
-              >
+              <p className="hello">
                 <img src={Sun} alt="" /> Good Morning, it's currently
               </p>
             ) : (
-              <p
-                className="hello"
-                style={{ textTransform: "uppercase", letterSpacing: "4px" }}
-              >
+              <p className="hello">
                 <img src={Moon} alt="" /> Good evening, it's currently
               </p>
             )}
@@ -97,12 +96,12 @@ const Time = ({ setBackgroundClass }) => {
           <p>Time loading...</p>
         )}
       </div>
-      {/* TimeDetails à droite */}
       <div className="time-details-wrapper">
         <TimeDetails
           formattedTime={formattedTime}
           timezone={location?.country_name}
           location={location}
+          onToggleDetails={handleToggleDetails}
         />
       </div>
     </div>

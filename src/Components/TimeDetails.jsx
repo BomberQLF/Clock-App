@@ -2,8 +2,13 @@ import React, { useState } from "react";
 import Up from "../assets/desktop/icon-arrow-up.svg";
 import Down from "../assets/desktop/icon-arrow-down.svg";
 
-const TimeDetails = ({ formattedTime, timezone }) => {
+const TimeDetails = ({ formattedTime, timezone, onToggleDetails }) => {
   const [details, showDetails] = useState(false);
+
+  const toggleDetails = () => {
+    showDetails(!details);
+    onToggleDetails(!details); 
+  };
 
   if (!formattedTime) {
     return null;
@@ -45,7 +50,7 @@ const TimeDetails = ({ formattedTime, timezone }) => {
 
   return (
     <>
-      <button className="buttonMenu" onClick={() => showDetails(!details)}>
+      <button className="buttonMenu" onClick={toggleDetails}>
         {details ? (
           <>
             Less <img src={Up} alt="Arrow Up" />
@@ -57,30 +62,32 @@ const TimeDetails = ({ formattedTime, timezone }) => {
         )}
       </button>
 
-      {details && (
-        <div className="details-container">
-          <div className="left-side">
-            <div className="timezone-wrapper">
-              <h2>Current Timezone</h2>
-              <p>{timezone}</p>
+      <div className={`details-container ${details ? 'expanded' : 'collapsed'}`}>
+        {details && (
+          <div className="details-content">
+            <div className="left-side">
+              <div className="timezone-wrapper">
+                <h2>Current Timezone</h2>
+                <p>{timezone}</p>
+              </div>
+              <div className="dayOfYear-wrapper">
+                <h2>Day of the year</h2>
+                <p>{dayOfYear}</p>
+              </div>
             </div>
-            <div className="dayOfYear-wrapper">
-              <h2>Day of the year</h2>
-              <p>{dayOfYear}</p>
+            <div className="right-side">
+              <div className="dayOfWeek-wrapper">
+                <h2>Day of the week</h2>
+                <p>{dayOfWeek}</p>
+              </div>
+              <div className="weekNumber-wrapper">
+                <h2>Week number</h2>
+                <p>{weekNumber}</p>
+              </div>
             </div>
           </div>
-          <div className="right-side">
-            <div className="dayOfWeek-wrapper">
-              <h2>Day of the week</h2>
-              <p>{dayOfWeek}</p>
-            </div>
-            <div className="weekNumber-wrapper">
-              <h2>Week number</h2>
-              <p>{weekNumber}</p>
-            </div>
-          </div>
-        </div>
-      )}
+        )}
+      </div>
     </>
   );
 };

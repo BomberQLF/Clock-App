@@ -10,12 +10,15 @@
 }
 
 .App {
+  display: flex;
   height: 100vh;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   color: white;
   transition: background 1s ease-in-out;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 body {
@@ -40,17 +43,13 @@ body {
 }
 
 .quote-time-container {
-  position: absolute;
-  bottom: 0;
   padding: 4rem;
 }
-
 
 .time-details-wrapper {
   margin-left: auto;
   position: absolute;
   bottom: 0;
-  right: 4rem;
   width: 100%;
   padding: 2rem 2rem 0 9rem;
 }
@@ -95,4 +94,27 @@ body {
 .buttonMenu:active {
   transform: translateY(1px);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+.details-container {
+  overflow: hidden; 
+  transition: max-height 0.5s ease;
+}
+
+.details-container.collapsed {
+  max-height: 0;
+}
+
+.details-container.expanded {
+  max-height: 500px;
+}
+.quote-time-wrapper {
+  position: relative;
+  transition: transform 0.5s ease, margin 0.5s ease;
+}
+
+.quote-time-wrapper.details-visible .quote-time-container {
+  transform: translateY(
+    -150px
+  ); 
+  margin-bottom: 150px;
 }
