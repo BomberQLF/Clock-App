@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Sun from "../assets/desktop/icon-sun.svg";
 import Moon from "../assets/desktop/icon-moon.svg";
+import TimeDetails from "./TimeDetails";
 
 const Time = ({ setBackgroundClass }) => {
   const [time, setTime] = useState(null);
@@ -61,34 +62,49 @@ const Time = ({ setBackgroundClass }) => {
   const hour = time ? new Date(time).getHours() : null;
 
   return (
-    <div className="quote-time-container">
-      {time ? (
-        <>
-          {hour >= 6 && hour < 18 ? (
-            <p
-              className="hello"
-              style={{ textTransform: "uppercase", letterSpacing: "4px" }}
-            >
-              <img src={Sun} alt="" /> Good Morning, it's currently
+    <div className="quote-time-wrapper">
+      <div className="quote-time-container">
+        {time ? (
+          <>
+            {hour >= 6 && hour < 18 ? (
+              <p
+                className="hello"
+                style={{ textTransform: "uppercase", letterSpacing: "4px" }}
+              >
+                <img src={Sun} alt="" /> Good Morning, it's currently
+              </p>
+            ) : (
+              <p
+                className="hello"
+                style={{ textTransform: "uppercase", letterSpacing: "4px" }}
+              >
+                <img src={Moon} alt="" /> Good evening, it's currently
+              </p>
+            )}
+            <h1 style={{ fontSize: "10rem", textTransform: "uppercase" }}>
+              {formattedTime}{" "}
+              {timezone && (
+                <span style={{ fontSize: "3rem", fontWeight: "200" }}>
+                  {timezone}
+                </span>
+              )}{" "}
+            </h1>
+            <p style={{ fontSize: "1.3rem", textTransform: "uppercase" }}>
+              In {location?.city}, {location?.country_name}
             </p>
-          ) : (
-            <p
-              className="hello"
-              style={{ textTransform: "uppercase", letterSpacing: "4px" }}
-            >
-              <img src={Moon} alt="" /> Good evening, it's currently
-            </p>
-          )}
-          <h1 style={{ fontSize: "10rem", textTransform: "uppercase" }}>
-            {formattedTime} {timezone && <span style={{ fontSize: '3rem', fontWeight: '200' }}>{timezone}</span>}{" "}
-          </h1>
-          <p style={{ fontSize: "1.3rem", textTransform: "uppercase" }}>
-            In {location?.city}, {location?.country_name}
-          </p>
-        </>
-      ) : (
-        <p>Time loading...</p>
-      )}
+          </>
+        ) : (
+          <p>Time loading...</p>
+        )}
+      </div>
+      {/* TimeDetails à droite */}
+      <div className="time-details-wrapper">
+        <TimeDetails
+          formattedTime={formattedTime}
+          timezone={location?.country_name}
+          location={location}
+        />
+      </div>
     </div>
   );
 };
