@@ -49,7 +49,9 @@ body {
 .time-details-wrapper {
   margin-left: auto;
   width: 100%;
-  padding: 2rem 2rem 0 9rem;
+  color: black;
+  background-color: #f1f1f1;
+  filter: opacity(0.9);
 }
 
 .buttonMenu {
@@ -112,7 +114,35 @@ body {
 
 .quote-time-wrapper.details-visible .quote-time-container {
   transform: translateY(
-    -150px
+    -25px
   ); 
-  margin-bottom: 150px;
+}
+
+.details-content {
+  display: flex;
+  justify-content: space-around;
+  padding: 2rem;
+}
+
+.left-side{
+  border-right: 1px solid #303030;
+  padding-right: 19rem;
+}
+.left-side,
+.right-side {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+h2 {
+  font-size: 1rem;
+  text-transform: uppercase;
+  font-weight: 200;
+  letter-spacing: 2px;
+  color: #303030;
+}
+h2 + p {
+  font-size: 4rem;
+  font-weight: 600;
+  color: #303030;
 }

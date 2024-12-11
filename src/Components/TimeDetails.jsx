@@ -3,54 +3,53 @@ import Up from "../assets/desktop/icon-arrow-up.svg";
 import Down from "../assets/desktop/icon-arrow-down.svg";
 
 const TimeDetails = ({ formattedTime, timezone, onToggleDetails }) => {
-  const [details, showDetails] = useState(false);
+  const [details, setDetails] = useState(false);
 
   const toggleDetails = () => {
-    showDetails(!details);
-    onToggleDetails(!details); 
+    setDetails(!details);
+    onToggleDetails(!details);
   };
 
   if (!formattedTime) {
     return null;
   }
 
-  // Utiliser la date actuelle avec l'heure passée
-  const now = new Date(); // Date actuelle
+  const now = new Date();
   const timeParts = formattedTime.split(":");
-  
+
   if (timeParts.length < 2) {
     console.error("formattedTime doit être au format HH:mm");
     return <p>Erreur de format de l'heure</p>;
   }
 
-  // Construire une date complète avec la date actuelle et l'heure passée
   const date = new Date(
     now.getFullYear(),
     now.getMonth(),
     now.getDate(),
-    parseInt(timeParts[0], 10), // Heure
-    parseInt(timeParts[1], 10)  // Minutes
+    parseInt(timeParts[0], 10),
+    parseInt(timeParts[1], 10)
   );
 
-  // Vérifier si la date est valide
   if (isNaN(date.getTime())) {
     console.error("Date invalide :", formattedTime);
     return <p>Erreur de format de l'heure</p>;
   }
 
-  // Calcul du jour de l'année
-  const startOfYear = new Date(date.getFullYear(), 0, 1); // Début de l'année
+  const startOfYear = new Date(date.getFullYear(), 0, 1);
   const dayOfYear = Math.floor((date - startOfYear) / (1000 * 60 * 60 * 24)) + 1;
-
-  // Jour de la semaine (1 = Lundi, 7 = Dimanche)
   const dayOfWeek = ((date.getDay() + 6) % 7) + 1;
-
-  // Numéro de la semaine
   const weekNumber = Math.ceil((dayOfYear + startOfYear.getDay() - 1) / 7);
 
   return (
     <>
-      <button className="buttonMenu" onClick={toggleDetails}>
+      <button
+        className={`buttonMenu ${details ? "expanded" : "collapsed"}`}
+        onClick={toggleDetails}
+        style={{
+          transform: details ? "translateY(-350px)" : "translateY(-50px)",
+          transition: "transform 0.3s ease-in-out",
+        }}
+      >
         {details ? (
           <>
             Less <img src={Up} alt="Arrow Up" />
@@ -62,7 +61,7 @@ const TimeDetails = ({ formattedTime, timezone, onToggleDetails }) => {
         )}
       </button>
 
-      <div className={`details-container ${details ? 'expanded' : 'collapsed'}`}>
+      <div className={`details-container ${details ? "expanded" : "collapsed"}`}>
         {details && (
           <div className="details-content">
             <div className="left-side">
