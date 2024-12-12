@@ -52,7 +52,7 @@ const TimeDetails = ({ formattedTime, timezone, onToggleDetails }) => {
       >
         {details ? (
           <>
-            Less <img src={Up} alt="Arrow Up" />
+            Less <img src={Up} style={{ fill: 'black' }} alt="Arrow Up" />
           </>
         ) : (
           <>
