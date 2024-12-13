@@ -146,3 +146,36 @@ h2 + p {
   font-weight: 600;
   color: #303030;
 }
+
+@media (max-width: 1024px) {
+  .left-side {
+    padding-right: 10rem;
+  }
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 7rem !important;
+  }
+  span {
+    font-size: 2rem !important;
+  }
+  .quote-author {
+    font-size: 1rem !important;
+  }
+  .left-side {
+    border: none;
+  }
+}
+
+@media (max-width: 475px) {
+  .quote-time-container p {
+    font-size: 1rem;
+  }
+  h2 {
+    font-size: .6rem;
+  }
+  h2 + p {
+    font-size: 1.8rem;
+  }
+}
