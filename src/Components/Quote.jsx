@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import RefreshIcon from '../../src/assets/desktop/icon-refresh.svg';
+import RefreshIcon from '../assets/desktop/icon-refresh.svg';
 
 const Quote = () => {
     const [quote, setQuote] = useState(null);

@@ -29,11 +29,11 @@ body {
 }
 
 .App.daytime {
-  background-image: url("./assets/desktop/bg-image-daytime.jpg");
+  background-image: url("/assets/desktop/bg-image-daytime.jpg");
 }
 
 .App.nighttime {
-  background-image: url("./assets/desktop/bg-image-nighttime.jpg");
+  background-image: url("/assets/desktop/bg-image-nighttime.jpg");
 }
 
 .hello {

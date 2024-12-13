@@ -29,7 +29,7 @@ const Time = ({ setBackgroundClass }) => {
         // Étape 2 : Récupérer l'heure locale en fonction du fuseau horaire
         const timezone = locationData.timezone;
         const timeResponse = await fetch(
-          `http://worldtimeapi.org/api/timezone/${timezone}`
+          `https://worldtimeapi.org/api/timezone/${timezone}`
         );
         if (!timeResponse.ok) {
           throw new Error(
